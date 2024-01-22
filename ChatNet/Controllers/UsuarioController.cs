@@ -1,7 +1,4 @@
-﻿
-using System.Text.Json;
-using AutoMapper;
-using Data;
+﻿using AutoMapper;
 using Data.Models;
 using Data.ModelsView;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +12,8 @@ namespace ChatNet.Controllers
         private IMapper _mapper;
         private mensajeRepository<Mensaje> _messageServices;
 
-        public UsuarioController(UsuarioRepository<Usuario> service, 
-            IMapper mapper, 
+        public UsuarioController(UsuarioRepository<Usuario> service,
+            IMapper mapper,
             mensajeRepository<Mensaje> messageServices)
         {
             _service = service;
@@ -33,7 +30,7 @@ namespace ChatNet.Controllers
 
             var isAchoiseName = await _service.FindAUser(usuario.nickName);
 
-            if(isAchoiseName != null)
+            if (isAchoiseName != null)
             {
                 response.Message = "El nombre se usaurio ya ha sido selecionado";
                 return BadRequest(response);
@@ -43,7 +40,8 @@ namespace ChatNet.Controllers
             user.NickName = usuario.nickName;
             var status = await _service.UdpateUsuario(user);
 
-            if (!status) {
+            if (!status)
+            {
                 response.Message = "No se ha podido Modificar el usuario";
                 return BadRequest(response);
             }

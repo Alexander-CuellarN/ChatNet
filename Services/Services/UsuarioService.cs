@@ -2,12 +2,6 @@
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Services.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Services
 {
@@ -53,10 +47,10 @@ namespace Services.Services
 
         public async Task<Usuario> FindAUser(string nickName)
         {
-                var usuario = await _context.Usuarios
-                    .Where(u => u.NickName == nickName)
-                    .FirstOrDefaultAsync();
-                return usuario;
+            var usuario = await _context.Usuarios
+                .Where(u => u.NickName == nickName)
+                .FirstOrDefaultAsync();
+            return usuario;
         }
 
         public async Task<Usuario> FindUserById(int usuarioId)

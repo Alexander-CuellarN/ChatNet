@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Models;
 using Data.ModelsView;
 using Microsoft.AspNetCore.Mvc;
@@ -21,8 +20,8 @@ namespace ChatNet.Controllers
         public async Task<IActionResult> Index()
         {
             var salas = _mapper.Map<List<SalaModelView>>(await _service.ListSalas());
-         
-          if (!TempData.ContainsKey("userId") || !TempData.ContainsKey("userName"))
+
+            if (!TempData.ContainsKey("userId") || !TempData.ContainsKey("userName"))
                 return RedirectToAction("Index", "Home");
 
             var userLogedId = TempData["userId"].ToString();
@@ -33,7 +32,7 @@ namespace ChatNet.Controllers
 
             TempData.Keep("userId");
             TempData.Keep("userName");
-            
+
             if (TempData.ContainsKey("Message")) ViewBag.Message = TempData["message"];
             return View(salas);
         }
@@ -41,7 +40,7 @@ namespace ChatNet.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            
+
             if (!TempData.ContainsKey("userId") || !TempData.ContainsKey("userName"))
                 return RedirectToAction("Index", "Home");
 
@@ -59,7 +58,7 @@ namespace ChatNet.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create( SalaModelView modelView)
+        public async Task<IActionResult> Create(SalaModelView modelView)
         {
             if (!ModelState.IsValid) return View(modelView);
 
@@ -67,15 +66,15 @@ namespace ChatNet.Controllers
             var status = await _service.CreateSala(salaNew);
 
             if (!status) return View(modelView);
-            TempData.Add("message",$"la sala {salaNew.Title} ha sido creada con exito");
+            TempData.Add("message", $"la sala {salaNew.Title} ha sido creada con exito");
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var salaFounded = await _service.FindSalaById(id);          
-            if(salaFounded == null)
+            var salaFounded = await _service.FindSalaById(id);
+            if (salaFounded == null)
             {
                 TempData.Add("message", "No se ha podido encontrar la sala selecionada.");
                 return RedirectToAction(nameof(Index));
@@ -102,7 +101,7 @@ namespace ChatNet.Controllers
             var ResponseSchema = new ResponseGeneric<SalaModelView>();
             var sala = await _service.FindSalaById(id);
 
-            if(sala == null)
+            if (sala == null)
             {
                 ResponseSchema.Message = "No se ha podido encontrar la sala selecionada";
                 return BadRequest(ResponseSchema);

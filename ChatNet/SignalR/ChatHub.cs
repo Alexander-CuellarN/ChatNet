@@ -1,7 +1,6 @@
 ﻿using Data.Models;
 using Microsoft.AspNetCore.SignalR;
 using Services.Repositories;
-using Services.Services;
 
 namespace ChatNet.SignalR
 {
@@ -35,9 +34,9 @@ namespace ChatNet.SignalR
 
             var mensaje = await _mensajes.CreateMessages(newMensaje);
 
-            await Clients.Group(room.ToString()).SendAsync("newMessage", 
-                Message, 
-                mensaje.MensajeId, 
+            await Clients.Group(room.ToString()).SendAsync("newMessage",
+                Message,
+                mensaje.MensajeId,
                 userModel.NickName);
         }
 
@@ -45,8 +44,8 @@ namespace ChatNet.SignalR
         {
             var responseDelete = await _mensajes.DeleteMessage(messageId);
 
-            await Clients.Group(room.ToString()).SendAsync("DeleteMessage", 
-                responseDelete, 
+            await Clients.Group(room.ToString()).SendAsync("DeleteMessage",
+                responseDelete,
                 messageId);
         }
     }

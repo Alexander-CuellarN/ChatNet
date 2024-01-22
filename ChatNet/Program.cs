@@ -24,7 +24,8 @@ internal class Program
         builder.Services.AddScoped<SalaRepository<Sala>, SalaService>();
         builder.Services.AddScoped<mensajeRepository<Mensaje>, MensajeService>();
 
-        builder.Services.AddSignalR(o => {
+        builder.Services.AddSignalR(o =>
+        {
             o.EnableDetailedErrors = true;
         });
 

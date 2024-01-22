@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using ChatNet.Models;
 using Data.Models;
 using Data.ModelsView;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MySqlX.XDevAPI;
 using Services.Repositories;
-using System.Diagnostics;
-using System.Text.Json;
 
 namespace ChatNet.Controllers
 {
@@ -72,7 +67,7 @@ namespace ChatNet.Controllers
             var userLogedId = TempData["userId"].ToString();
             var userLogedName = TempData["userName"].ToString();
 
-            if( userLogedId == null)
+            if (userLogedId == null)
                 return RedirectToAction("Index");
 
             var userLogin = await _service.FindAUser(userLogedName);
