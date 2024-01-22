@@ -1,0 +1,21 @@
+﻿@using Data.ModelsView
+@model SalaModelView
+
+<section>
+    @using (@Html.BeginForm("Create", "Sala", FormMethod.Post)){
+    <div class="mb-3">
+        <label for="title" class="form-label">@Html.DisplayNameFor(s => s.Title)</label>
+        <input type="text" asp-for="Title" class="form-control">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="Descripcion" class="form-label">@Html.DisplayNameFor(s => s.Descripcion)</label>
+        <textarea asp-for="Descripcion" class="form-control"></textarea>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-outline-primary">Crear</button>
+        <a asp-action="Index" asp-controller="Sala" class="btn btn-outline-info">Regresar</a>
+    </div>
+    }
+</section>

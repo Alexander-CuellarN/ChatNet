@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Chat .Net";
+}
+<link rel="stylesheet" href="~/css/layout/main.css"/>
+
+<section class="ChatContainer">
+    <article>
+        <nav >
+            <div class="d-flex align-content-center mx-2 my-2">
+                <h3>Salas Disponibles</h3>
+            </div>
+            <ul  class="list-group mylistMenu">
+                @foreach (var room in ViewBag.Salas)
+                {
+                    <li class="list-group-item mb-1">
+                        <p class=" btnNewConnection" data-room="@room.SalaID">@room.Title</p>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <input type="hidden" value="@ViewBag.UserName" id="userName" />
+        <input type="hidden" value="@ViewBag.UserId" id="userId"/>
+    </article>
+    <article>
+        <div>
+            <div id="messagePanel"></div>
+            <div class="formContainer"> </div>
+        </div>
+        <div>
+            <input class="form-control w-70" type="text" placeholder="hola, como estan..." id="messageContent"/>
+            <button class="btn btn-outline-primary" id="SendNewMessage" disabled>Enviar</button>
+        </div>
+
+    </article>
+</section>
+
+
+<script src="~/js/Rooms.js" type="module"></script>
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js" type="text/javascript"></script>
+        
